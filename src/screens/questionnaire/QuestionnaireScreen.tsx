@@ -1,22 +1,22 @@
 import React, { useState, useRef } from 'react';
 import {
     View,
-    Text,
-    TouchableOpacity,
     StatusBar,
     useWindowDimensions,
+    Alert,
 } from 'react-native';
 
 import Carousel from 'react-native-snap-carousel';
 import { useDispatch, useSelector } from 'react-redux';
-import { QUESTIONS } from '../../../core/helpers/Contants';
-import { navigate } from '../../../core/navigation/NavigationServices';
-import Strings from '../../../res/strings/Strings';
+import Strings from '../../res/strings/Strings';
 import * as Progress from 'react-native-progress';
-import colors from '../../../res/themes/Colors';
+import colors from '../../res/themes/Colors';
 import styles from './Styles';
 import Question from '../../components/Question';
 import { setSelectedAnswers } from '../../redux/reducers/QuestionnaireReducer';
+import { QUESTIONS } from '../../core/helpers/Contants';
+import { navigate } from '../../core/navigation/NavigationServices';
+import CustomButton from '../../components/CustomButton';
 
 const QuestionnaireScreen: React.FC = () => {
 
@@ -26,35 +26,41 @@ const QuestionnaireScreen: React.FC = () => {
     const [index, setIndex] = useState<number>(0);
     const { width } = useWindowDimensions();
     const carouselReference = useRef<any>(null);
+    const [isAnswered, setIsAnswered] = useState<boolean[]>(Array(QUESTIONS.length).fill(false));
 
     const renderData = ({ item }: any) => (
-        
-        <View style={{ minHeight: 550 }}>
+        <View style={{ minHeight: 550 }} key={item?.id} >
             <Question
-                key={item?.name}
                 options={item?.options}
                 question={item?.label}
                 onChange={(value: any) => handleValues(value)}
-                selectedValues={[]}
+                selectedValues={selectedAnswers[index] ? [selectedAnswers[index]] : []}
             />
         </View>
     );
 
     const handleValues = (value: string[]) => {
         let newSelectedAnswers = [...selectedAnswers];
+        newSelectedAnswers[index] = value[0];
         newSelectedAnswers.push(value[0]);
         dispatch(setSelectedAnswers(newSelectedAnswers));
+
+        setIsAnswered(prev => {
+            const updated = [...prev];
+            updated[index] = Boolean(value.length); // true if an answer is selected, false otherwise
+            return updated;
+        });
     }
 
     const createResult = () => {
         let totalScore = 0;
-    
+
         selectedAnswers.forEach((choice: string, index: number) => {
             const question = QUESTIONS[index];
             if (!question) {
                 return; // Skip if no question is found
             }
-    
+
             const choiceIndex = question.options.indexOf(choice);
             if (choiceIndex !== -1) {
                 const score = question.scores[choiceIndex];
@@ -66,14 +72,24 @@ const QuestionnaireScreen: React.FC = () => {
 
         navigate('ResultScreen', totalScore);
     };
-    
-    
+
+
 
     const onPressNext = () => {
+        if (!isAnswered[index]) {
+            Alert.alert("Please select an answer before proceeding.");
+            return;
+        }
         if (index === QUESTIONS.length - 1) {
             createResult();
         } else {
             carouselReference?.current?.snapToNext();
+        }
+    };
+
+    const onPressBack = () => {
+        if (index > 0) {
+            carouselReference?.current?.snapToPrev();
         }
     };
 
@@ -104,12 +120,21 @@ const QuestionnaireScreen: React.FC = () => {
                 useScrollView={true}
                 onSnapToItem={index => setIndex(index)}
             />
+
             <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.nextButton} onPress={onPressNext}>
-                    <Text style={styles.nextButtonText}>
-                        {index === QUESTIONS.length - 1 ? Strings.FINISH : Strings.NEXT}
-                    </Text>
-                </TouchableOpacity>
+                {index > 0 && (
+                    <CustomButton
+                        title={Strings.BACK}
+                        onPress={onPressBack}
+                        isBackButton={true}
+                        style={styles.leftButtonStyles}
+                    />
+                )}
+                <CustomButton
+                    title={index === QUESTIONS.length - 1 ? Strings.FINISH : Strings.NEXT}
+                    onPress={onPressNext}
+                    style={styles.rightButtonStyles}
+                />
             </View>
         </View>
     );

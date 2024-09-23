@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, Pressable } from 'react-native';
-import colors from '../../res/themes/Colors';
+import colors from '../res/themes/Colors';
 import CheckBox from 'react-native-check-box';
 
 export type selectedOptionType = {
@@ -14,7 +14,7 @@ export type QuestionProps = {
   onChange: (value: null | string[]) => void;
 }
 
-const Question = ({ question, options, selectedValues, onChange }: QuestionProps) => {
+const Question = ({ question, options, selectedValues, onChange,}: QuestionProps) => {
   const [selectedOption, setSelectedOption] = useState<selectedOptionType>({});
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const Question = ({ question, options, selectedValues, onChange }: QuestionProps
       {question && <Text style={styles.question}>{question}</Text>}
       {options?.map((option: string) => {
         return (
-          <Pressable  onPress={() => onOptionPress(option)}>
+          <Pressable  onPress={() => onOptionPress(option)} key={option}>
             <View style={styles.chip}>
               <CheckBox
                 style={styles.checkbox}

@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import QuestionnaireScreen from '../../../src/screens/questionnaire/QuestionnaireScreen';
-import ResultScreen from '../../../src/screens/result/ResultScreen';
-import SplashScreen from '../../../src/screens/splash/SplashScreen';
+import SplashScreen from '../../../screens/splash/SplashScreen';
+import QuestionnaireScreen from '../../../screens/questionnaire/QuestionnaireScreen';
+import ResultScreen from '../../../screens/result/ResultScreen';
 
 type AppNavigatorProps = {};
 

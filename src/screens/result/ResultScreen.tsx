@@ -4,15 +4,15 @@ import {
   Text,
   StatusBar,
   ImageBackground,
-  TouchableOpacity,
 } from 'react-native';
 
-import { resetActions } from '../../../core/navigation/NavigationServices';
-import {useDispatch} from 'react-redux';
-import Strings from '../../../res/strings/Strings';
-import { QUESTIONS } from '../../../core/helpers/Contants';
+import { useDispatch } from 'react-redux';
+import Strings from '../../res/strings/Strings';
 import styles from './Styles';
 import { resetSelectedAnswers } from '../../redux/reducers/QuestionnaireReducer';
+import { resetActions } from '../../core/navigation/NavigationServices';
+import { QUESTIONS } from '../../core/helpers/Contants';
+import CustomButton from '../../components/CustomButton';
 
 interface ResultScreenProps {
   route: {
@@ -20,12 +20,12 @@ interface ResultScreenProps {
   };
 }
 
-const ResultScreen: React.FC<ResultScreenProps> = ({route}) => {
+const ResultScreen: React.FC<ResultScreenProps> = ({ route }) => {
   const dispatch = useDispatch();
   const totalScore = route?.params;
 
   const determineRiskProfile = (score: number): string => {
-    
+
     // Calculate the minimum and maximum possible scores
     const minScore = QUESTIONS.reduce(
       (sum, question) => sum + Math.min(...question.scores),
@@ -39,9 +39,9 @@ const ResultScreen: React.FC<ResultScreenProps> = ({route}) => {
     // Define the ranges dynamically
     const rangeStep = (maxScore - minScore) / 3;
     const ranges = [
-      {upperLimit: minScore + rangeStep, riskProfile: 'Conservative'},
-      {upperLimit: minScore + 2 * rangeStep, riskProfile: 'Balanced'},
-      {upperLimit: maxScore, riskProfile: 'Aggressive'},
+      { upperLimit: minScore + rangeStep, riskProfile: 'Conservative' },
+      { upperLimit: minScore + 2 * rangeStep, riskProfile: 'Balanced' },
+      { upperLimit: maxScore, riskProfile: 'Aggressive' },
     ];
 
     // Find the appropriate risk profile based on the score
@@ -55,8 +55,8 @@ const ResultScreen: React.FC<ResultScreenProps> = ({route}) => {
   };
 
   return (
-     <ImageBackground
-       source={require('../../../res/images/background.jpg')}
+    <ImageBackground
+      source={require('../../res/images/background.jpg')}
       style={styles.backgroundImage}>
       <StatusBar
         translucent
@@ -69,17 +69,16 @@ const ResultScreen: React.FC<ResultScreenProps> = ({route}) => {
           <Text style={styles.feedbackTitle}>
             {determineRiskProfile(totalScore)}
           </Text>
-          <Text style={{}}>{Strings.RISK_DESCRIPTION}</Text>
+          <Text style={styles.descriptionText}>{Strings.RISK_DESCRIPTION}</Text>
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.nextButton}
+          <CustomButton
+            title={Strings.START_AGAIN}
             onPress={() => {
               resetActions('QuestionnaireScreen');
               dispatch(resetSelectedAnswers());
-            }}>
-            <Text style={styles.nextButtonText}>{Strings.START_AGAIN}</Text>
-          </TouchableOpacity>
+            }}
+          />
         </View>
       </View>
     </ImageBackground>

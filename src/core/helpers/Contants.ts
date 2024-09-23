@@ -1,6 +1,6 @@
 export const QUESTIONS = [
     {
-        id: 1,
+        id: "1",
         name: 'experience',
         label: 'How would you describe your investment experience?',
         options: ['Novice', 'Intermediate', 'Advanced'],
@@ -8,7 +8,7 @@ export const QUESTIONS = [
         scores: [1, 2, 3],
     },
     {
-        id: 2,
+        id: "2",
         name: 'risk_tolerance',
         label: 'How would you rate your risk tolerance?',
         options: ['Very risk-averse', 'Somewhat risk-averse', 'Moderate', 'Risk-tolerant'],
@@ -16,7 +16,7 @@ export const QUESTIONS = [
         scores: [1, 2, 3, 4],
     },
     {
-        id: 3,
+        id: "3",
         name: 'investment_goals',
         label: 'What are your primary investment goals?',
         options: ['Capital preservation', 'Income generation', 'Capital appreciation', 'Speculation'],
@@ -24,7 +24,7 @@ export const QUESTIONS = [
         scores: [1, 2, 3, 4],
     },
     {
-        id: 4,
+        id: "4",
         name: 'time_horizon',
         label: 'What is your investment time horizon?',
         options: ['Short-term (less than 1 year)', 'Medium-term (1-5 years)', 'Long-term (more than 5 years)'],
@@ -32,7 +32,7 @@ export const QUESTIONS = [
         scores: [1, 2, 3],
     },
     {
-        id: 5,
+        id: "5",
         name: 'knowledge',
         label: 'How would you rate your knowledge of financial markets?',
         options: ['Limited', 'Average', 'Extensive'],
@@ -40,7 +40,7 @@ export const QUESTIONS = [
         scores: [1, 2, 3],
     },
     {
-        id: 6,
+        id: "6",
         name: 'liquidity_needs',
         label: 'How important is liquidity to you?',
         options: ['Very important', 'Moderately important', 'Not very important'],
@@ -48,7 +48,7 @@ export const QUESTIONS = [
         scores: [1, 2, 3],
     },
     {
-        id: 7,
+        id: "7",
         name: 'investment_style',
         label: 'Which investment style best describes you?',
         options: ['Conservative', 'Moderate', 'Aggressive'],
@@ -56,7 +56,7 @@ export const QUESTIONS = [
         scores: [1, 2, 3],
     },
     {
-        id: 8,
+        id: "8",
         name: 'income_source',
         label: 'What is your primary source of income?',
         options: ['Salary/Wages', 'Business/Entrepreneurship', 'Investments'],
@@ -64,7 +64,7 @@ export const QUESTIONS = [
         scores: [1, 2, 3],
     },
     {
-        id: 9,
+        id: "9",
         name: 'investment_knowledge',
         label: 'How confident are you in making investment decisions?',
         options: ['Not confident', 'Somewhat confident', 'Very confident'],
@@ -72,7 +72,7 @@ export const QUESTIONS = [
         scores: [1, 2, 3],
     },
     {
-        id: 10,
+        id: "10",
         name: 'market_volatility',
         label: 'How do you feel about market volatility?',
         options: ['I cannot tolerate it', 'I can handle some volatility', 'I embrace volatility'],

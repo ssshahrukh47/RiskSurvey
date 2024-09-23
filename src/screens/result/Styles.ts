@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import colors from "../../../res/themes/Colors";
+import colors from "../../res/themes/Colors";
 
 const styles = StyleSheet.create({
     backgroundImage: {
@@ -31,20 +31,15 @@ const styles = StyleSheet.create({
       marginBottom: 10,
       fontSize:18,
     },
-    nextButton: {
-      backgroundColor: colors.primaryColor,
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: 100,
-      width: 100,
-      borderRadius: 50,
+    descriptionText : {
+      color:colors.black,
+      fontSize:16,
     },
-    nextButtonText: {
-      fontSize: 14,
-      fontWeight: '500',
-      color: colors.white,
+    buttonContainer: {
+      position: 'absolute', 
+      bottom: 10, 
+      right: 20
     },
-    buttonContainer: {position: 'absolute', bottom: 10, right: 10},
   });
 
   export default styles

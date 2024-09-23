@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {View, Image, StyleSheet, StatusBar,Text} from 'react-native';
-import colors from '../../../res/themes/Colors';
-import Strings from '../../../res/strings/Strings';
+import colors from '../../res/themes/Colors';
+import Strings from '../../res/strings/Strings';
 
 const SplashScreen: React.FC = ({navigation}:any) => {
   useEffect(() => {
@@ -20,7 +20,7 @@ const SplashScreen: React.FC = ({navigation}:any) => {
         backgroundColor={'transparent'}
       />
       <Image
-        source={require('../../../res/images/background.jpg')}
+        source={require('../../res/images/background.jpg')}
         style={styles.image}
         testID="splash-screen-image"
       />

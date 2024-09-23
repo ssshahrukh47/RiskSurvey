@@ -3,12 +3,12 @@ import {render, fireEvent, act} from '@testing-library/react-native';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import QuestionnaireScreen from '../src/screens/questionnaire/QuestionnaireScreen';
-import { QUESTIONS } from '../core/helpers/Contants';
-import Strings from '../res/strings/Strings';
+import Strings from '../src/res/strings/Strings';
+import { QUESTIONS } from '../src/core/helpers/Contants';
 
 // Mock the NavigationHelpers
 
-jest.mock('../core/navigation/NavigationServices', () => ({
+jest.mock('../src/core/navigation/NavigationServices', () => ({
   navigate: jest.fn(),
   resetActions: jest.fn(),
 }));
